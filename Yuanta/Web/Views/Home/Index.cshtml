@@ -1,0 +1,93 @@
+﻿@using Web.Data;
+@using Web.Models;
+
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+@{
+    var tData = await new TrxData("wwwroot/assets/DT230216.csv").GetRank();
+
+    var yData = tData.Single(x => x.BrokerCode == "FS");
+
+    var bry = yData.Rank;
+    var mvy = (yData.BuyValue + yData.BuyValueForeign) + (yData.SellValue + yData.SellValueForeign);
+    var msy = mvy / yData.TotalTradeValue * 100 / 2;
+}
+
+<div>
+    <div class="row">
+        <div class="col-md-3"><strong>Broker Rank Yuanta</strong></div>
+        <div class="col-md-9"><strong>@bry</strong></div>
+    </div>
+    <div class="row">
+        <div class="col-md-3"><strong>Total Value Trading</strong></div>
+        <div class="col-md-9"><strong>@yData.TotalTradeValue</strong></div>
+    </div>
+    <div class="row">
+        <div class="col-md-3"><strong>Market Value Yuanta</strong></div>
+        <div class="col-md-9"><strong>@mvy</strong></div>
+    </div>
+    <div class="row">
+        <div class="col-md-3"><strong>Market Share Yuanta</strong></div>
+        <div class="col-md-9"><strong>@msy</strong></div>
+    </div>
+</div>
+<hr />
+<div>
+    <div class="row">
+        <div class="col-md-12">
+            <table class="table table-striped">
+                <thead class="thead-dark">
+                    <tr>
+                        <th><strong>TradeDate</strong></th>
+                        <th><strong>BrokerCode</strong></th>
+                        <th><strong>Rank</strong></th>
+
+                        <th><strong>BuyFreq</strong></th>
+                        <th><strong>BuyVol</strong></th>
+                        <th><strong>BuyValue</strong></th>
+
+                        <th><strong>BuyFreqFrgn</strong></th>
+                        <th><strong>BuyVolFrgn</strong></th>
+                        <th><strong>BuyValueFrgn</strong></th>
+
+                        <th><strong>SellFreq</strong></th>
+                        <th><strong>SellVol</strong></th>
+                        <th><strong>SellValue</strong></th>
+
+                        <th><strong>SellFreqFrgn</strong></th>
+                        <th><strong>SellVolFrgn</strong></th>
+                        <th><strong>SellValueFrgn</strong></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in tData)
+                    {
+                        <tr>
+                            <td>@Html.DisplayFor(x => item.TradeDate)</td>
+                            <td>@Html.DisplayFor(x => item.BrokerCode)</td>
+                            <td>@Html.DisplayFor(x => item.Rank)</td>
+
+                            <td>@Html.DisplayFor(x => item.BuyFreq)</td>
+                            <td>@Html.DisplayFor(x => item.BuyVol)</td>
+                            <td>@Html.DisplayFor(x => item.BuyValue)</td>
+
+                            <td>@Html.DisplayFor(x => item.BuyFreqForeign)</td>
+                            <td>@Html.DisplayFor(x => item.BuyVolForeign)</td>
+                            <td>@Html.DisplayFor(x => item.BuyValueForeign)</td>
+
+                            <td>@Html.DisplayFor(x => item.SellFreq)</td>
+                            <td>@Html.DisplayFor(x => item.SellVol)</td>
+                            <td>@Html.DisplayFor(x => item.SellValue)</td>
+
+                            <td>@Html.DisplayFor(x => item.SellFreqForeign)</td>
+                            <td>@Html.DisplayFor(x => item.SellVolForeign)</td>
+                            <td>@Html.DisplayFor(x => item.SellValueForeign)</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

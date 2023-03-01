@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "Ry0ZyIHtVmfB/UrlX3oOeAVP3FkJojCNBHojwYY28JxWACqxljXQEGIAiPISzTWExa8JmJ0zaFZiimdtqcMSrA==",
+  "success": true,
+  "projectFilePath": "/media/permata/Data/IntTest/Yuanta/Web/Web.csproj",
+  "expectedPackageFiles": [
+    "/home/permata/.nuget/packages/lumenworkscsvreader/4.0.0/lumenworkscsvreader.4.0.0.nupkg.sha512"
+  ],
+  "logs": []
+}
